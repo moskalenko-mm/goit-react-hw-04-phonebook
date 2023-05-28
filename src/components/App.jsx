@@ -27,7 +27,7 @@ const App = () => {
       name,
       number,
     };
-    return setContacts([contact, ...contacts]);
+    return setContacts(prevContact => [contact, ...prevContact]);
   };
 
   const handleSearch = event => {
@@ -35,12 +35,14 @@ const App = () => {
   };
 
   const handleClick = id => {
-    return setContacts(contacts.filter(item => item.id !== id));
+    return setContacts(prevContact =>
+      prevContact.filter(item => item.id !== id)
+    );
   };
 
-  const filteredContacts = contacts[0]
-    ? contacts.filter(contact => contact.name.toLowerCase().includes(filter))
-    : [];
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter)
+  );
 
   return (
     <Container>
